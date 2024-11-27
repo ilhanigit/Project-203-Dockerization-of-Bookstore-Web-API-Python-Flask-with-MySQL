@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book - Bookstore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-wide">
+
+    <!-- Main Container -->
+    <div class="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+
+        <!-- Header Section -->
+        <header class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-blue-500">Edit Book Details</h1>
+            <p class="text-lg text-gray-600">Make changes to the book details below.</p>
+        </header>
+
+        <!-- Edit Book Form -->
+        <form action="/books/{{ book.book_id }}/edit" method="POST" class="space-y-6">
+            <div>
+                <label for="title" class="block text-gray-700 font-semibold">Book Title</label>
+                <input type="text" name="title" id="title" value="{{ book.title }}" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+
+            <div>
+                <label for="author" class="block text-gray-700 font-semibold">Author</label>
+                <input type="text" name="author" id="author" value="{{ book.author }}" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+
+            <div>
+                <label for="is_sold" class="block text-gray-700 font-semibold">Book Status</label>
+                <select name="is_sold" id="is_sold" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="1" {% if book.is_sold %}selected{% endif %}>Sold</option>
+                    <option value="0" {% if not book.is_sold %}selected{% endif %}>Available</option>
+                </select>
+            </div>
+
+            <!-- Buttons with space in between and centered -->
+            <div class="flex justify-center space-x-4 mt-6">
+                <button type="button" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">Back</button>
+                <button type="submit" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">Update Book</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+

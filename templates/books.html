@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books - Bookstore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-wide">
+
+    <!-- Main Container -->
+    <div class="max-w-6xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+
+        <!-- Header Section -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-blue-500">Bookstore</h1>
+            <p class="text-lg text-gray-600">Here are all the books in your collection.</p>
+        </header>
+
+        <!-- Books Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-lg shadow-md">
+                <thead>
+                    <tr>
+                        <th class="py-3 px-5 bg-blue-500 text-white text-left">Book Title</th>
+                        <th class="py-3 px-5 bg-blue-500 text-white text-left">Author</th>
+                        <th class="py-3 px-5 bg-blue-500 text-white text-left">Status</th>
+                        <th class="py-3 px-5 bg-blue-500 text-white text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr class="border-t">
+                            <td class="py-3 px-5">{{ book.title }}</td>
+                            <td class="py-3 px-5">{{ book.author }}</td>
+                            <td class="py-3 px-5">
+                                <span class="py-1 px-3 rounded-full {{ 'bg-green-500' if book.is_sold else 'bg-yellow-500' }} text-white">
+                                    {{ 'Sold' if book.is_sold else 'Available' }}
+                                </span>
+                            </td>
+                            <td class="py-3 px-5 text-center">
+                                <a href="/books/{{ book.book_id }}/edit" class="text-blue-500 hover:text-blue-700">Edit</a> |
+                                <form action="/books/{{ book.book_id }}/delete" method="POST" class="inline">
+                                    <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="mt-6 text-center space-x-3">
+            <a href="/" class="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-600 transition duration-300">Home</a>
+            <a href="/books/add" class="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-600 transition duration-300">Add a New Book</a>
+        </div>
+    </div>
+</body>
+</html>
+
